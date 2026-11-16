@@ -18,7 +18,10 @@ body[data-theme="light"] .configrow input,body[data-theme="light"] .configrow se
 /* Paletas editables, V11 */
 :root{--secondary:#a77bf5;--app-bg:#111019;--app-surface:#211e2b;--app-panel:#292536;--app-input:#13111b;--app-border:#51485e;--app-text:#f7f5fb;--app-muted:#bdb8cb}
 body{min-height:100dvh;background:var(--app-bg);color:var(--app-text)}
-.navtabs{background:var(--app-bg)}
+.navtabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--app-bg)}
+.navtabs .btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;padding-inline:2px;text-align:center}
+.navtabs .tab-icon{font-size:18px;line-height:1.2}
+.navtabs .tab-label{font-size:clamp(9px,3vw,13px);line-height:1.2;white-space:nowrap}
 .exercise,.empty{background:var(--app-surface);border-color:var(--app-border)}
 .btn:not(.active):not(.primary):not(.danger){background:var(--app-panel);border-color:var(--app-border);color:var(--app-text)}
 .muted,.note{color:var(--app-muted)}
@@ -60,15 +63,26 @@ body[data-theme="light"] .configrow input,body[data-theme="light"] .configrow se
 #progressArea .shrek-portrait{position:relative;display:grid;place-items:center;aspect-ratio:1;background:radial-gradient(#7250a0,#392855 68%);border-radius:9px;overflow:hidden}
 #progressArea .shrek-portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 #progressArea .shrek-portrait span{color:var(--game-gold);font-size:23px}
-#progressArea .shrek-level.locked img{filter:brightness(0);opacity:.55}
-#progressArea .shrek-level.locked .shrek-portrait span{z-index:1}
+
 
 /* V23 — Gaming progress, scoped to progress tab */
 #progressArea{--game-purple:#b68aff;--game-gold:#f7dc6f;color:#f5f0ff}
-#progressArea .game-hero{padding:23px;border:1px solid #5b397d;border-radius:20px;background:radial-gradient(ellipse at 95% 0%,#4a2876 0%,transparent 58%),linear-gradient(140deg,#221538,#121222);margin-bottom:16px}
+.tab-content{--tab-gradient:radial-gradient(ellipse at 95% 0%,#4a2876 0%,transparent 58%),linear-gradient(140deg,#221538,#121222);background:var(--tab-gradient) top center / 100% min(520px,100%) no-repeat #121222;border:1px solid #5b397d;border-radius:20px;padding:clamp(9px,3vw,23px);min-width:0}
+body[data-theme="light"] .tab-content:not(#progressArea){--tab-gradient:radial-gradient(ellipse at 95% 0%,#dcc7f6 0%,transparent 58%),linear-gradient(140deg,#f3eafa,#fff);background-color:#fff}
+#progressArea .game-hero{display:grid;grid-template-columns:minmax(0,1fr) clamp(76px,25vw,145px);align-items:center;gap:12px;margin-bottom:16px;padding:4px}
+#progressArea .game-versus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#progressArea .game-player{display:grid;gap:5px;padding:10px;border:1px solid #63448d;border-radius:12px;background:#33274e}
+#progressArea .game-player strong{color:var(--game-gold)}
+#progressArea .game-xp-guide{border-top:1px solid #493563;padding-top:12px;margin-top:12px}
+#progressArea .game-xp-guide summary{cursor:pointer;font-weight:700}
+#progressArea .game-xp-rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;margin:12px 0}
+#progressArea .game-xp-rules section{padding:10px;border-radius:12px;background:#33274e}
+#progressArea .game-xp-rules h4{margin:0 0 7px}
+#progressArea .game-xp-rules ul{margin:0;padding-left:17px;font-size:13px}
+#progressArea .game-xp-rules li+li{margin-top:6px}
 #progressArea .game-kicker{color:#d4b4ff;letter-spacing:2px;font-size:11px;font-weight:800}
 #progressArea .game-hero h2{font-size:clamp(25px,5vw,38px);letter-spacing:1px;margin:9px 0}
-#progressArea .game-hero h2 span{font-size:13px;color:#f7dc6f;background:#3d2c55;padding:7px 10px;border-radius:20px;vertical-align:middle;white-space:nowrap}
+
 #progressArea .game-hero p{color:#bfb0d3;margin:0}
 #progressArea .game-panel{background:#211935;border:1px solid #493563;border-radius:18px;padding:18px;margin:14px 0;color:#f4edff}
 #progressArea .game-panel h3{color:#fff;margin:0 0 12px;font-size:17px}
@@ -82,11 +96,17 @@ body[data-theme="light"] .configrow input,body[data-theme="light"] .configrow se
 #progressArea .game-stat>span{font-size:22px}
 #progressArea .game-stat strong{font-size:clamp(17px,3.5vw,27px);color:#fff}
 #progressArea .game-stat small{font-size:10px;color:#c5b5df;letter-spacing:1px}
-#progressArea .game-badges{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
-#progressArea .game-achievement{text-align:center;padding:12px 5px;border-radius:13px;background:#33274e;border:1px solid #63448d}
-#progressArea .game-achievement>div{font-size:26px}
-#progressArea .game-achievement small{display:block;font-size:10px;margin-top:6px}
-#progressArea .game-achievement.locked{filter:grayscale(1);opacity:.42}
+#progressArea .game-badge-group{border-top:1px solid #493563;padding:10px 0}
+#progressArea .game-badge-group summary{cursor:pointer;font-weight:700}
+#progressArea .game-badge-group summary small{margin-left:6px}
+#progressArea .game-badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,165px),1fr));gap:9px;margin-top:10px}
+#progressArea .game-achievement{display:grid;align-content:start;gap:5px;padding:12px;border-radius:13px;background:#33274e;border:1px solid #63448d}
+#progressArea .game-achievement.unlocked{border-color:#b99253}
+#progressArea .game-achievement.locked{background:#28203a}
+#progressArea .game-achievement strong{font-size:14px}
+#progressArea .game-achievement p{font-size:13px;margin:0;color:#f4edff}
+#progressArea .game-achievement small{font-size:11px}
+#progressArea .game-achievement .badge-status{color:var(--game-gold)}
 #progressArea .game-chart svg{width:100%;height:auto;display:block}
 #progressArea .game-chart-foot{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#c5b5df}
 #progressArea .game-chart-foot b{font-size:16px;color:#f7dc6f}
@@ -98,7 +118,7 @@ body[data-theme="light"] .configrow input,body[data-theme="light"] .configrow se
 #progressArea .game-record strong{color:#f7dc6f;white-space:nowrap}
 #progressArea>.exercise{background:#211935;border-color:#493563;color:#f5f0ff}
 #progressArea>.exercise h3{color:#fff}
-@media(max-width:440px){#progressArea .game-badges{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style><style>
 .set.activeSet{background:color-mix(in srgb,var(--secondary,#a77bf5) 23%,transparent)!important;border:2px solid var(--secondary,#a77bf5)!important;box-shadow:0 0 0 2px #ad82ef22!important;border-radius:11px;transition:background .2s ease}
 .set.restSet:not(.activeSet){background:#214a3040!important;border-radius:9px}
@@ -107,6 +127,15 @@ body[data-theme="light"] .configrow input,body[data-theme="light"] .configrow se
 @keyframes burst{0%{transform:translate(0,0) scale(.4);opacity:1}75%{opacity:1}100%{transform:translate(var(--x),var(--y)) rotate(650deg) scale(.6);opacity:0}}
 @media(prefers-reduced-motion:reduce){.spark{animation:none;display:none}}
 </style><style>
+.routine-xp{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 12px;padding:9px 12px;border:1px solid #947644;border-radius:12px;background:#282038;color:#f8e6ab;font-size:13px}
+.routine-xp strong,.summary-xp strong{color:#ffe18a}
+.summary-xp{padding:10px 12px;border:1px solid #947644;border-radius:12px;background:#282038;color:#f8e6ab}
+.summary-xp p{margin:4px 0 0}
+.xp-pop{position:fixed;z-index:250;left:50%;top:calc(16px + env(safe-area-inset-top));translate:-50% 0;pointer-events:none;max-width:calc(100vw - 32px);padding:9px 14px;border:1px solid #eac265;border-radius:14px;background:#2a2038;color:#ffe18a;text-align:center;box-shadow:0 4px 20px #17101dbb;animation:xp-pop 2s ease-out both}
+.xp-pop strong{display:block;font-size:22px;text-shadow:0 0 12px #eac26588}
+.xp-pop small{display:block;color:#fff0c2}
+@keyframes xp-pop{0%{opacity:0;transform:translateY(7px) scale(.75)}15%{opacity:1;transform:translateY(0) scale(1.08)}25%,75%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-12px) scale(1)}}
+@media(prefers-reduced-motion:reduce){.xp-pop{animation:none}}
 .summary-modal{position:fixed;inset:0;z-index:200;background:#09080ddc;display:flex;justify-content:center;align-items:center;padding:18px;overflow:auto}
 .summary-card{width:min(760px,100%);max-height:95vh;overflow:auto;background:#211d2d;border:1px solid #8b73a8;border-radius:20px;padding:22px;color:#f6f1fa}
 .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.summary-stat{padding:12px;border:1px solid #61546f;border-radius:12px}
@@ -119,7 +148,7 @@ body[data-theme="light"] .configrow input,body[data-theme="light"] .configrow se
  .fiona-map{max-width:380px;margin:12px auto}.fiona-map svg{width:100%;height:auto;display:block;border-radius:16px}.fiona-map polygon{mix-blend-mode:screen;pointer-events:none}
 </style></head><body>
 <section id="welcome" class="welcome"><h1>¿Quién va a entrenar?</h1><div class="profiles"><button class="profile" id="chooseTincho"><span class="avatar">🏋️</span>Tincho</button><button class="profile" id="chooseEve"><span class="avatar">💪</span>Eve</button></div><p class="muted">Cada perfil tiene sus propios registros.</p></section>
-<main id="app" class="app hidden"><div class="top"><div><div class="muted">GYM TRACKER</div><h1 id="hello"></h1></div><button class="btn" id="changeProfile">Cambiar usuario</button></div><div class="navtabs" id="navtabs"><button class="btn active" data-tab="routine">🏋️ Rutina</button><button class="btn" data-tab="progress">📈 Progreso</button><button class="btn" data-tab="running">🏃 Running</button><button class="btn" data-tab="settings">⚙️ Configuración</button></div><div id="tinchoArea"><h2 id="routineHeading">Elegí tu rutina Full Body</h2><div class="buttons" id="days"><button class="btn" data-day="A">Día A</button><button class="btn" data-day="B">Día B</button><button class="btn" data-day="C">Día C</button></div><button id="addPlanToggle" class="btn softbtn" type="button">＋ Agregar plan</button>
+<main id="app" class="app hidden"><div class="top"><div><div class="muted">GYM TRACKER</div><h1 id="hello"></h1></div><button class="btn" id="changeProfile">Cambiar usuario</button></div><div class="navtabs" id="navtabs"><button class="btn active" data-tab="routine"><span class="tab-icon" aria-hidden="true">🏋️</span><span class="tab-label">Rutina</span></button><button class="btn" data-tab="progress"><span class="tab-icon" aria-hidden="true">📈</span><span class="tab-label">Progreso</span></button><button class="btn" data-tab="running"><span class="tab-icon" aria-hidden="true">🏃</span><span class="tab-label">Running</span></button><button class="btn" data-tab="settings"><span class="tab-icon" aria-hidden="true">⚙️</span><span class="tab-label">Configuración</span></button></div><div id="tinchoArea" class="tab-content"><div class="routine-xp"><span>XP de esta rutina <small>(al guardar)</small></span><strong id="routineXp">0 XP</strong></div><h2 id="routineHeading">Elegí tu rutina Full Body</h2><div class="buttons" id="days"><button class="btn" data-day="A">Día A</button><button class="btn" data-day="B">Día B</button><button class="btn" data-day="C">Día C</button></div><button id="addPlanToggle" class="btn softbtn" type="button">＋ Agregar plan</button>
 <div id="newPlanPanel" class="exercise hidden"><h3>Crear un plan personalizado</h3><p class="muted">Tus planes A, B y C originales no se modifican.</p>
 <div class="configrow"><input id="newPlanName" placeholder="Nombre, ej. Full Body D" maxlength="45"></div>
 <div class="configrow"><select id="newPlanGroup"></select><select id="newPlanExercise"></select><button id="addPlanExercise" class="btn" type="button">Añadir ejercicio</button></div>
@@ -129,7 +158,7 @@ body[data-theme="light"] .configrow input,body[data-theme="light"] .configrow se
 <div class="configrow"><label>Actividad <select id="warmupType"><option value="Cinta">🏃 Cinta</option><option value="Bici">🚴 Bici</option></select></label>
 <label>Minutos <input id="warmupMinutes" type="number" min="0" max="180" step="0.1" value="10"></label>
 <label>Kilómetros <input id="warmupKm" type="number" min="0" step="0.01" placeholder="0.00"></label></div><div id="warmupPace" class="stats">Ingresá la distancia para calcular el ritmo.</div></section>
-<div id="exerciseList"></div><button class="btn primary" id="save">✓ Guardar entrenamiento</button></div><section id="progressArea" class="hidden"><div class="game-hero"><div class="game-kicker">✦ PLAYER STATS / GYM TRACKER</div><h2>⚡ LEVEL UP <span id="gameLevel">LVL 01</span></h2><p id="gameCurrentCharacter">Grillo</p></div><div id="progressMetrics"></div><div class="exercise" style="margin-top:18px"><h3>⚖️ Peso corporal</h3><form id="weightForm"><label>Fecha <input id="weightDate" type="date" required></label><label>Peso (kg) <input id="bodyWeight" type="number" min="20" max="400" step="0.1" required placeholder="76.5"></label><button class="btn primary" type="submit">Guardar peso</button></form><div id="weightChart"></div><div id="weightEntries"></div><button class="btn softbtn danger" id="resetWeights" type="button">🗑️ Borrar todos los registros de peso</button></div><div id="strengthChart"></div></section><section id="runningArea" class="hidden"><h2>🏃 Running</h2><p class="muted">Cargá tus salidas de Strava manualmente. El ritmo se calcula automáticamente.</p><form id="runningForm" class="exercise"><label>Fecha <input type="date" id="runDate" required></label><label>Distancia (km) <input type="number" min="0.1" step="0.01" id="runKm" required placeholder="5.00"></label><label>Tiempo (minutos) <input type="number" min="0.1" step="0.01" id="runMinutes" required placeholder="28.5"></label><label>Notas <input type="text" id="runNotes" maxlength="150" placeholder="Rodaje suave, intervalos..."></label><button class="btn primary" type="submit">Guardar salida</button></form><div id="runningMetrics"></div><div id="runningHistory"></div><p class="note">La sincronización automática con Strava todavía no está conectada.</p></section><section id="settingsArea" class="hidden"><h2>⚙️ Configuración</h2>
+<div id="exerciseList"></div><button class="btn primary" id="save">✓ Guardar entrenamiento</button></div><section id="progressArea" class="tab-content hidden"><div class="game-hero"><div><div class="game-kicker">Nivel actual</div><h2 id="gameLevel"></h2><p id="gameCurrentCharacter"></p></div><div class="shrek-portrait"><span aria-hidden="true">★</span><img id="gameCurrentPortrait" alt=""></div></div><div id="progressMetrics"></div><div class="exercise" style="margin-top:18px"><h3>⚖️ Peso corporal</h3><form id="weightForm"><label>Fecha <input id="weightDate" type="date" required></label><label>Peso (kg) <input id="bodyWeight" type="number" min="20" max="400" step="0.1" required placeholder="76.5"></label><button class="btn primary" type="submit">Guardar peso</button></form><div id="weightChart"></div><div id="weightEntries"></div><button class="btn softbtn danger" id="resetWeights" type="button">🗑️ Borrar todos los registros de peso</button></div><div id="strengthChart"></div></section><section id="runningArea" class="tab-content hidden"><h2>🏃 Running</h2><p class="muted">Cargá tus salidas de Strava manualmente. El ritmo se calcula automáticamente.</p><form id="runningForm" class="exercise"><label>Fecha <input type="date" id="runDate" required></label><label>Distancia (km) <input type="number" min="0.1" step="0.01" id="runKm" required placeholder="5.00"></label><label>Tiempo (minutos) <input type="number" min="0.1" step="0.01" id="runMinutes" required placeholder="28.5"></label><label>Notas <input type="text" id="runNotes" maxlength="150" placeholder="Rodaje suave, intervalos..."></label><button class="btn primary" type="submit">Guardar salida</button></form><div id="runningMetrics"></div><div id="runningHistory"></div><p class="note">La sincronización automática con Strava todavía no está conectada.</p></section><section id="settingsArea" class="tab-content hidden"><h2>⚙️ Configuración</h2>
 <div class="exercise"><h3>🎨 Apariencia</h3><p class="muted">Elegí una de estas 5 paletas o combiná tus propios colores. Los cambios se aplican al instante y se guardan para tu perfil.</p>
 <div id="paletteGrid" class="palette-grid" aria-label="Paletas de colores"></div>
 <div class="color-pickers"><div class="color-control"><label for="accentColor">Color principal <span class="muted">(botones y detalles)</span></label><input id="accentColor" type="color" value="#d1f67d"></div>
@@ -190,7 +219,34 @@ function exercisePhoto(name) {
  return EXERCISE_PHOTOS[key === "gluten bridge" ? "glute bridge" : key];
 }
 
-function render(){const container=$("exerciseList");container.replaceChildren();if(!session){showEmptyPlans();return}$("warmupPanel").classList.remove("hidden");$("save").classList.remove("hidden");$("editPlan").classList.remove("hidden");$("deletePlan").classList.remove("hidden");session.forEach((ex,i)=>{const prev=priorFor(ex.name);const card=document.createElement("article");card.className="exercise";const head=document.createElement("div");head.className="head";const photo=document.createElement("img");photo.className="thumb";photo.src=exercisePhoto(ex.name)||MACHINE_PHOTOS[PHOTO_MAP_2[DATA.catalog[ex.name]??0]];photo.alt="Foto de referencia: "+ex.name;const title=document.createElement("div");title.innerHTML=`<div class="exname"></div><div class="muted"></div>`;title.children[0].textContent=(i+2)+". "+ex.name;title.children[1].textContent=ex.sets.length+" series · "+ex.range+" reps";head.append(photo,title);photo.style.cursor="zoom-in";photo.setAttribute("role","button");photo.tabIndex=0;photo.title="Ampliar fotos";photo.addEventListener("click",()=>openGallery(ex.name));photo.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openGallery(ex.name)}});card.append(head);
+const XP_PER_SET = 10;
+const XP_PER_WEIGH_IN = 5;
+
+function completedSet(set) {
+ return set.done && Number(set.kg) > 0 && Number(set.reps) > 0;
+}
+
+function updateRoutineXp() {
+ const sets = (session || []).reduce((total, exercise) => total + exercise.sets.filter(completedSet).length, 0);
+ $("routineXp").textContent = (sets * XP_PER_SET).toLocaleString('es-AR') + ' XP';
+}
+
+function showXpGain(amount, reason) {
+ if (amount <= 0) return;
+ document.querySelector(".xp-pop")?.remove();
+ const pop = document.createElement("div");
+ const score = document.createElement("strong");
+ const label = document.createElement("small");
+ pop.className = "xp-pop";
+ pop.setAttribute("role", "status");
+ score.textContent = '✦ +' + amount.toLocaleString('es-AR') + ' XP';
+ label.textContent = reason;
+ pop.append(score, label);
+ document.body.append(pop);
+ setTimeout(() => pop.remove(), 2000);
+}
+
+function render(){updateRoutineXp();const container=$("exerciseList");container.replaceChildren();if(!session){showEmptyPlans();return}$("warmupPanel").classList.remove("hidden");$("save").classList.remove("hidden");$("editPlan").classList.remove("hidden");$("deletePlan").classList.remove("hidden");session.forEach((ex,i)=>{const prev=priorFor(ex.name);const card=document.createElement("article");card.className="exercise";const head=document.createElement("div");head.className="head";const photo=document.createElement("img");photo.className="thumb";photo.src=exercisePhoto(ex.name)||MACHINE_PHOTOS[PHOTO_MAP_2[DATA.catalog[ex.name]??0]];photo.alt="Foto de referencia: "+ex.name;const title=document.createElement("div");title.innerHTML=`<div class="exname"></div><div class="muted"></div>`;title.children[0].textContent=(i+2)+". "+ex.name;title.children[1].textContent=ex.sets.length+" series · "+ex.range+" reps";head.append(photo,title);photo.style.cursor="zoom-in";photo.setAttribute("role","button");photo.tabIndex=0;photo.title="Ampliar fotos";photo.addEventListener("click",()=>openGallery(ex.name));photo.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openGallery(ex.name)}});card.append(head);
 const control=document.createElement("div");control.className="controls";
 function controlButton(label,action){const b=document.createElement("button");b.className="btn";b.textContent=label;b.addEventListener("click",action);control.append(b);return b}
 
@@ -203,21 +259,33 @@ const detail=document.createElement("details");detail.className="tutorial";const
 const prior=document.createElement("div");prior.className="prior";prior.textContent=prev?"Última vez: "+prev.sets.map((s,j)=>"S"+(j+1)+": "+s.kg+" kg × "+s.reps).join(" · "):"Sin registros anteriores de este día";card.append(prior);
 if(prev){const copy=document.createElement("button");copy.className="btn primary";copy.textContent="Copiar pesos y reps anteriores";copy.addEventListener("click",()=>{ex.sets.forEach((s,j)=>{if(prev.sets[j]){s.kg=String(prev.sets[j].kg);s.reps=String(prev.sets[j].reps)}});storeDraft();render();notify("Pesos y repeticiones copiados ✓")});card.append(copy)}
 ex.sets.forEach((set,j)=>{const row=document.createElement("div");row.className="set";row.dataset.exercise=i;row.dataset.series=j;const number=document.createElement("span");number.textContent=(j+1)+".";row.append(number);
-for(const [field,labelText] of [["kg","Kg"],["reps","Reps"]]){const wrapper=document.createElement("div");const label=document.createElement("label");label.textContent=labelText;const input=document.createElement("input");input.type="number";input.min="0";input.step=field==="kg"?"0.5":"1";input.inputMode=field==="kg"?"decimal":"numeric";input.value=set[field];input.setAttribute("aria-label",ex.name+" serie "+(j+1)+" "+labelText);input.addEventListener("input",()=>{set[field]=input.value;storeDraft()});wrapper.append(label,input);row.append(wrapper)}
-const done=document.createElement("button");done.className="check"+(set.done?" checked":"");done.textContent=set.done?"✓":"○";done.setAttribute("aria-label","Marcar serie "+(j+1)+" de "+ex.name);done.addEventListener("click",()=>{set.done=!set.done;done.classList.toggle("checked",set.done);done.textContent=set.done?"✓":"○";storeDraft();updateActive();if(set.done){startRest();updateActive();const old=prev?.sets?.[j];const earlier=j>0?ex.sets[j-1]:null;
+for(const [field,labelText] of [["kg","Kg"],["reps","Reps"]]){const wrapper=document.createElement("div");const label=document.createElement("label");label.textContent=labelText;const input=document.createElement("input");input.type="number";input.min="0";input.step=field==="kg"?"0.5":"1";input.inputMode=field==="kg"?"decimal":"numeric";input.value=set[field];input.setAttribute("aria-label",ex.name+" serie "+(j+1)+" "+labelText);input.addEventListener("input",()=>{const wasComplete=completedSet(set);set[field]=input.value;storeDraft();updateRoutineXp();if(!wasComplete&&completedSet(set))showXpGain(XP_PER_SET,"Serie completada · al guardar")});wrapper.append(label,input);row.append(wrapper)}
+const done=document.createElement("button");done.className="check"+(set.done?" checked":"");done.textContent=set.done?"✓":"○";done.setAttribute("aria-label","Marcar serie "+(j+1)+" de "+ex.name);done.addEventListener("click",()=>{set.done=!set.done;done.classList.toggle("checked",set.done);done.textContent=set.done?"✓":"○";storeDraft();updateActive();updateRoutineXp();if(completedSet(set))showXpGain(XP_PER_SET,"Serie completada · al guardar");if(set.done){startRest();updateActive();const old=prev?.sets?.[j];const earlier=j>0?ex.sets[j-1]:null;
 const improvedPrevious=old&&(Number(set.kg)>Number(old.kg)||Number(set.reps)>Number(old.reps));
 const improvedWithin=earlier&&earlier.done&&(Number(set.kg)>Number(earlier.kg)||Number(set.reps)>Number(earlier.reps));
 if(Number(set.kg)>0&&Number(set.reps)>0&&(improvedPrevious||improvedWithin)){notify("🎆 ¡Nuevo progreso! ¡Subiste peso o repeticiones!");launchFireworks()}}});row.append(done);
 const remove=document.createElement("button");remove.className="remove";remove.textContent="×";remove.title="Quitar esta serie";remove.setAttribute("aria-label","Eliminar serie "+(j+1));remove.addEventListener("click",()=>{if(ex.sets.length<=1){notify("Dejá al menos una serie");return}ex.sets.splice(j,1);storeDraft();render()});row.append(remove);card.append(row)});
 const add=document.createElement("button");add.className="btn primary";add.textContent="＋ Agregar serie";add.style.marginTop="9px";add.addEventListener("click",()=>{ex.sets.push({kg:"",reps:"",done:false});storeDraft();render()});card.append(add);container.append(card)});updateActive()}
 function saveWorkout(){
-const exercises=session.map(e=>({name:e.name,sets:e.sets.filter(x=>x.done&&Number(x.kg)>0&&Number(x.reps)>0).map(x=>({kg:Number(x.kg),reps:Number(x.reps)}))})).filter(e=>e.sets.length);
+const exercises=session.map(e=>({name:e.name,sets:e.sets.filter(completedSet).map(x=>({kg:Number(x.kg),reps:Number(x.reps)}))})).filter(e=>e.sets.length);
 if(!exercises.length){notify("Completá una serie con kg, reps y ✓");return}
 const duration=Math.round((Date.now()-sessionStarted)/1000);
 const warmup=warmupValues();
 const record={day,date:new Date().toISOString(),exercises,duration,warmup};
-const d=load();d[profile]??=[];d[profile].push(record);
-if(saveDb(d)){showSummary(record);session=baseSession();setWarmupDone(false);try{sessionStorage.removeItem(draftKey());sessionStorage.removeItem(warmupKey())}catch{}sessionStarted=Date.now();loadWarmup();render();skipRest();}
+const d=load();
+const before=progressExperience(d[profile] || [], []);
+d[profile]??=[];
+d[profile].push(record);
+if(saveDb(d)){
+ const after=progressExperience(d[profile], []);
+ const seriesXp=(after.sets-before.sets)*XP_PER_SET;
+ const recordXp=(after.weightRecords-before.weightRecords)*10;
+ const bonusXp=after.weeklyXp-before.weeklyXp;
+ const totalXp=after.xp-before.xp;
+ const rewards=[['Series',seriesXp],['Entrenamiento guardado',100],['Récords de peso',recordXp],['Bono semanal',bonusXp]];
+ showSummary(record,totalXp,rewards);
+ showXpGain(totalXp,'XP de la rutina guardada');
+ session=baseSession();setWarmupDone(false);try{sessionStorage.removeItem(draftKey());sessionStorage.removeItem(warmupKey())}catch{}sessionStarted=Date.now();loadWarmup();render();skipRest();}
 }
 function updateClock(){$("clock").textContent="00:"+String(seconds).padStart(2,"0")}
 function startRest(){clearInterval(interval);resting=true;seconds=60;updateClock();$("restBar").classList.remove("hidden");interval=setInterval(()=>{seconds--;updateClock();if(seconds<=0){skipRest();notify("⏰ ¡Descanso terminado! Siguiente serie resaltada.")}},1000)}
@@ -272,8 +340,8 @@ if(next&&warmupValues().done){document.querySelector(`.set[data-exercise="${next
 if(resting){const checked=[...document.querySelectorAll(".set")].filter(r=>r.querySelector(".check.checked"));checked.at(-1)?.classList.add("restSet")}
 }
 function showTab(t){currentTab=t;document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));$("tinchoArea").classList.toggle("hidden",t!=="routine");$("eveArea").classList.add("hidden");$("progressArea").classList.toggle("hidden",t!=="progress");$("runningArea").classList.toggle("hidden",t!=="running");if(t==="progress")renderProgress();if(t==="running")renderRunning();$("settingsArea").classList.toggle("hidden",t!=="settings");if(t==="settings")applyPrefs();updateActive()}
-function profileRecords(){const x=load();return x[profile]||[]}
-function profileExtras(){try{return JSON.parse(localStorage.getItem(KEY+"_extras_"+profile))||{weights:[],runs:[]}}catch{return {weights:[],runs:[]}}}
+function profileRecords(role = profile){const x=load();return x[role]||[]}
+function profileExtras(role = profile){try{return JSON.parse(localStorage.getItem(KEY+"_extras_"+role))||{weights:[],runs:[]}}catch{return {weights:[],runs:[]}}}
 function saveExtras(x){try{localStorage.setItem(KEY+"_extras_"+profile,JSON.stringify(x));;window.cloudSchedule?.();return true}catch{notify("No se pudo guardar en este navegador");return false}}
 function graph(data,key,unit){if(!data.length)return '<p class="muted">Todavía no hay registros.</p>';const values=data.map(x=>Number(x[key]));const lo=Math.min(...values),hi=Math.max(...values);return '<div class="chart">'+data.slice(-12).map((x,i)=>{const v=Number(x[key]);const pct=hi===lo?55:15+(v-lo)/(hi-lo)*85;return '<div class="chartcol"><div class="chartvalue">'+v.toFixed(1)+' '+unit+'</div><div class="chartbar" style="height:'+pct+'%"></div><small>'+new Date(x.date+'T12:00:00').toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit'})+'</small></div>'}).join('')+'</div>'}
 function gameLine(points,label,unit){
@@ -308,7 +376,7 @@ function runningXpCents(run) {
  return Math.round(km * (pace < 7 - 1e-9 ? 2000 : 1500));
 }
 
-function progressExperience(records, runs) {
+function progressExperience(records, runs, weights = []) {
  const bestLoads = new Map();
  const visitsByWeek = new Map();
  let sets = 0, weightRecords = 0, runningRecords = 0, weeklyXp = 0, runningCents = 0;
@@ -342,44 +410,180 @@ function progressExperience(records, runs) {
   longest = Math.max(longest, km);
   fastest = Math.min(fastest, pace);
  }
- const baseXp = 100 * records.length + 10 * (sets + weightRecords + runningRecords);
- return {sets, weightRecords, runningRecords, weeklyXp, runningXp: runningCents / 100,
+ const weighInXp = XP_PER_WEIGH_IN * weights.filter(weight => Number.isFinite(Number(weight.value)) && Number(weight.value) > 0).length;
+ const baseXp = 100 * records.length + XP_PER_SET * sets + 10 * (weightRecords + runningRecords) + weighInXp;
+ return {sets, weightRecords, runningRecords, weeklyXp, weighInXp, runningXp: runningCents / 100,
   xp: ((baseXp + weeklyXp) * 100 + runningCents) / 100};
 }
 
 function shrekLevelCard(character, index, currentIndex) {
- const locked = index > currentIndex;
+ const levelLabel = 'Nivel ' + (index + 1) + ' · ' + LEVEL_XP[index].toLocaleString('es-AR') + ' XP';
+ if (index > currentIndex) {
+  return '<li class="shrek-level locked"><div class="shrek-portrait"><span aria-hidden="true">?</span></div>' +
+   '<strong>Personaje secreto</strong><small>' + levelLabel + '</small><small>Bloqueado</small></li>';
+ }
  const current = index === currentIndex;
- const status = current ? "Nivel actual" : locked ? "Bloqueado" : "Desbloqueado";
- return '<li class="shrek-level' + (locked ? ' locked' : current ? ' current' : '') + '"' +
-  (current ? ' aria-current="step"' : '') + '><div class="shrek-portrait"><span aria-hidden="true">' +
-  (locked ? '🔒' : '★') + '</span><img src="' + escapeText(character.image) + '" alt="" loading="lazy" referrerpolicy="no-referrer"></div>' +
-  '<strong>' + escapeText(character.name) + '</strong><small>Nivel ' + (index + 1) + ' · ' +
-  LEVEL_XP[index].toLocaleString('es-AR') + ' XP</small><small>' + status + '</small></li>';
+ return '<li class="shrek-level' + (current ? ' current" aria-current="step"' : '"') +
+  '><div class="shrek-portrait"><span aria-hidden="true">★</span><img src="' +
+  escapeText(character.image) + '" alt="" loading="lazy"></div><strong>' + escapeText(character.name) +
+  '</strong><small>' + levelLabel + '</small><small>' + (current ? 'Nivel actual' : 'Desbloqueado') + '</small></li>';
+}
+
+function levelIndex(xp) {
+ return LEVEL_XP.findLastIndex(required => xp >= required);
+}
+
+function levelComparison(xp, level, number) {
+ const other = profile === 'tincho' ? 'eve' : 'tincho';
+ const otherName = other === 'eve' ? 'Eve' : 'Tincho';
+ const myName = profile === 'tincho' ? 'Tincho' : 'Eve';
+ const otherExtras = profileExtras(other);
+ const otherXp = progressExperience(profileRecords(other), otherExtras.runs || [], otherExtras.weights || []).xp;
+ const gap = Math.round(Math.abs(xp - otherXp) * 100) / 100;
+ const result = gap ? (xp > otherXp ? 'Vas ' + number(gap) + ' XP arriba.' :
+  otherName + ' va ' + number(gap) + ' XP arriba.') : 'Van empatados.';
+ return `<section class="game-panel"><h3>Tincho vs. Eve</h3><div class="game-versus">
+  <div class="game-player"><span>${myName} (vos)</span><strong>Nivel ${level}</strong><small>${number(xp)} XP</small></div>
+  <div class="game-player"><span>${otherName}</span><strong>Nivel ${levelIndex(otherXp) + 1}</strong><small>${number(otherXp)} XP</small></div>
+ </div><p class="game-muted">${result}</p></section>`;
+}
+
+const xpGuide = `<details class="game-xp-guide"><summary>Cómo sumar XP</summary><div class="game-xp-rules">
+ <section><h4>Gimnasio</h4><ul><li><b>+100 XP</b> por entrenamiento guardado</li>
+ <li><b>+10 XP</b> por serie completada</li><li><b>+10 XP</b> por récord de peso en un ejercicio</li></ul></section>
+ <section><h4>Running</h4><ul><li><b>+20 XP/km</b> a menos de 7:00 min/km</li>
+ <li><b>+15 XP/km</b> desde 7:00 min/km</li><li><b>+10 XP</b> por carrera con récord de distancia o ritmo</li></ul></section>
+ <section><h4>Bono semanal</h4><ul><li><b>+100 XP</b> al guardar 3 entrenamientos en la misma semana</li>
+ <li>Una vez por semana, de lunes a domingo, hora de Brisbane</li></ul></section>
+ <section><h4>Peso corporal</h4><ul><li><b>+${XP_PER_WEIGH_IN} XP</b> por registro guardado</li></ul></section>
+ </div><small>El primer registro de cada ejercicio y la primera carrera establecen tus marcas iniciales.</small></details>`;
+
+const SWAMP_ACHIEVEMENTS = [
+ {name:'Piernas y glúteos', badges:[
+  ['🫏','Patada de Burro','legSession',8,'8 series de piernas en una sesión','¡Esa patada la escucharon hasta en Muy Muy Lejano!'],
+  ['🥾','Botas embarradas','legs',30,'30 series de piernas acumuladas','Lo difícil del pantano es sacarse las botas después de piernas.'],
+  ['🧅','Cebolla de acero','legs',100,'100 series de piernas acumuladas','Cada capa de la cebolla tiene agujetas.'],
+  ['🐉','Aterrizaje de Dragona','glutes',20,'20 series con énfasis en glúteos','Pista de aterrizaje asegurada. El castillo no promete lo mismo.'],
+  ['🐸','Salto del rey Harold','calves',15,'15 series con énfasis en gemelos','Majestad, puede bajar de la plataforma.']
+ ]},
+ {name:'Fuerza y técnica', badges:[
+  ['🐈','Bigotes en guardia','core',15,'15 series de abdomen acumuladas','El Gato con Botas practicó esa pose frente al espejo.'],
+  ['👑','Fiona rompe el protocolo','push',30,'30 series con énfasis en pecho, hombros o tríceps','El protocolo real pedía una reverencia. Fiona entendió press.'],
+  ['🏰','Puente levadizo','pull',30,'30 series con énfasis en espalda o bíceps','El castillo ya te quiere contratar para subir el puente.'],
+  ['🎸','Rizos de Encantador','arms',20,'20 series con énfasis en bíceps','Tanto curl y todavía le queda tiempo para peinarse.'],
+  ['🍪','Gingy no se desmigaja','sets',100,'100 series completadas','Después de cien series, todos los botones siguen en su lugar.'],
+  ['🪞','Espejito del récord','weightRecords',1,'Mejorá tu marca de peso en un ejercicio','El espejo confirmó la marca. Después pidió que le limpies las huellas.'],
+  ['🐺','El Lobo Feroz va de compras','weightRecords',10,'10 récords de peso','Diez marcas nuevas y el camisón sigue intacto.'],
+  ['🧌','Mudanza al pantano','volume',10000,'10.000 kg de volumen acumulado','Shrek pidió ayuda con una silla y terminaste mudando el pantano entero.'],
+  ['🍪','Mongo levanta el castillo','volume',100000,'100.000 kg de volumen acumulado','Para este trabajo, hasta Mongo pidió cinturón.']
+ ]},
+ {name:'Constancia en el pantano', badges:[
+  ['🚪','Permiso para entrar al pantano','workouts',1,'Guardá tu primer entrenamiento','Shrek abrió la puerta. Dice que la próxima avises.'],
+  ['🧇','Cinco waffles después','workouts',5,'Guardá 5 entrenamientos','Burro ya puso la mesa. Los waffles cuentan como celebración.'],
+  ['🐷','Los tres cerditos pasan lista','bonusWeeks',1,'Guardá 3 entrenamientos en una semana','Cada cerdito puso un tilde. El lobo pidió que le cuenten el soplido.'],
+  ['🧚','Turno con el Hada Madrina','workouts',10,'Guardá 10 entrenamientos','La pócima era opcional. Anotar las series venía en letra chica.'],
+  ['🐭','Los ratones encuentran el gym','variety',12,'Entrená 12 ejercicios distintos','Ubicaron doce máquinas. La salida sigue en veremos.'],
+  ['🎺','Fanfarrias de Muy Muy Lejano','bonusWeeks',4,'Sumá 4 semanas con al menos 3 entrenamientos','La banda real ya se sabe tu horario.'],
+  ['👑','Príncipe del pantano','workouts',25,'Guardá 25 entrenamientos','La corona viene con barro incluido.'],
+  ['🐉','Dueño de las llaves del castillo','workouts',50,'Guardá 50 entrenamientos','Dragona te guarda las llaves. Andá a pedírselas vos.']
+ ]},
+ {name:'Running por Muy Muy Lejano', badges:[
+  ['🏃','Burro salió a trotar','runs',1,'Registrá tu primera carrera','Dijo que iba a trotar en silencio. Duró media cuadra.'],
+  ['🐈','El Gato estrena botas','longest',5,'Corré 5 km en una salida','Las botas impecables. El resto, cubierto de barro.'],
+  ['🧚','La pócima tenía cafeína','fastRun',3,'Corré 3 km o más a menos de 7:00 min/km','El Hada Madrina dice que ese ritmo no estaba en el prospecto.'],
+  ['🐺','El lobo perdió el aliento','longest',10,'Corré 10 km en una salida','El lobo gastó todo el aire persiguiéndote. Los cerditos festejan.'],
+  ['🍪','Gingy bate su marca','runningRecords',1,'Mejorá tu marca de distancia o ritmo','Gingy cruzó la meta sin perder una miga.'],
+  ['🗺️','¿Ya llegamos?','distance',25,'Acumulá 25 km corriendo','Burro preguntó en el km 1, en el 2… y volvió a preguntar en el 25.'],
+  ['🐸','Tour real de los charcos','runs',10,'Registrá 10 carreras','El rey Harold aprobó el recorrido. Tiene suficientes charcos.'],
+  ['🌙','De Duloc al pantano','distance',100,'Acumulá 100 km corriendo','Después de cien kilómetros, hasta el cartel de Duloc dice que te conoce.']
+ ]}
+];
+
+function renderSwampAchievements(records, runs, experience, volume) {
+ const stats = {...experience, workouts:records.length, volume, bonusWeeks:experience.weeklyXp / 100,
+  legs:0, legSession:0, glutes:0, calves:0, core:0, push:0, pull:0, arms:0,
+  runs:0, distance:0, longest:0, fastRun:0};
+ const exercises = new Set();
+ for (const record of records) {
+  let legSets = 0;
+  for (const exercise of record.exercises || []) {
+   const count = exercise.sets?.length || 0;
+   if (!count) continue;
+   exercises.add(exercise.name);
+   const muscles = MUSCLE_GROUPS[exercise.name] || {};
+   if (Math.max(muscles.quads || 0, muscles.hamstrings || 0, muscles.glutes || 0, muscles.calves || 0) >= .6) legSets += count;
+   if (muscles.glutes >= .6) stats.glutes += count;
+   if (muscles.calves >= .6) stats.calves += count;
+   if (muscles.abs >= .6) stats.core += count;
+   if (Math.max(muscles.chest || 0, muscles.shoulders || 0, muscles.triceps || 0) >= .6) stats.push += count;
+   if (Math.max(muscles.back || 0, muscles.biceps || 0) >= .6) stats.pull += count;
+   if (muscles.biceps >= .6) stats.arms += count;
+  }
+  stats.legs += legSets;
+  stats.legSession = Math.max(stats.legSession, legSets);
+ }
+ stats.variety = exercises.size;
+ for (const run of runs) {
+  const km = Number(run.km), minutes = Number(run.minutes);
+  if (!Number.isFinite(km) || !Number.isFinite(minutes) || km <= 0 || minutes <= 0) continue;
+  stats.runs++;
+  stats.distance += km;
+  stats.longest = Math.max(stats.longest, km);
+  if (minutes / km < 7 - 1e-9) stats.fastRun = Math.max(stats.fastRun, km);
+ }
+ let total = 0, unlocked = 0;
+ const groups = SWAMP_ACHIEVEMENTS.map(({name, badges}) => {
+  let earned = 0;
+  const cards = badges.map(([emoji, title, stat, target, condition, line]) => {
+   const actual = stats[stat];
+   const done = actual >= target - 1e-9;
+   if (done) earned++;
+   const progress = Math.floor(Math.min(actual, target) * 100 + 1e-8) / 100;
+   return `<article class="game-achievement ${done ? 'unlocked' : 'locked'}">
+    <strong><span aria-hidden="true">${emoji}</span> ${title}</strong>
+    <small>${condition}</small>
+    ${done ? `<small class="badge-status">✓ Desbloqueado</small><p>${line}</p>` :
+     `<small>🔒 ${progress.toLocaleString('es-AR')} / ${target.toLocaleString('es-AR')}</small>`}
+   </article>`;
+  }).join('');
+  total += badges.length;
+  unlocked += earned;
+  return `<details class="game-badge-group"><summary>${name} <small>${earned} / ${badges.length}</small></summary><div class="game-badges">${cards}</div></details>`;
+ }).join('');
+ return `<section class="game-panel"><div class="game-row"><h3>🏅 Logros del pantano</h3>
+  <small>${unlocked} / ${total}</small></div>${groups}</section>`;
 }
 
 function renderProgress(){
  const records=profileRecords(),extra=profileExtras(),all=records.flatMap(r=>r.exercises||[]);
- const {sets, xp, weeklyXp, runningXp} = progressExperience(records, extra.runs || []);
+ const experience = progressExperience(records, extra.runs || [], extra.weights || []);
+ const {sets, xp, weeklyXp, runningXp, weighInXp} = experience;
  const volume=records.map(r=>({date:(r.date||'').slice(0,10),value:(r.exercises||[]).reduce((n,e)=>n+(e.sets||[]).reduce((a,z)=>a+(Number(z.kg)||0)*(Number(z.reps)||0),0),0)})).sort((a,b)=>a.date.localeCompare(b.date));
  const best={};
  for(const e of all){const top=Math.max(0,...(e.sets||[]).map(z=>Number(z.kg)||0));if(top>0)best[e.name]=Math.max(best[e.name]||0,top)}
  const totalVolume=Math.round(volume.reduce((n,v)=>n+v.value,0));
- const currentIndex = LEVEL_XP.findLastIndex(required => xp >= required);
+ const currentIndex = levelIndex(xp);
  const level = currentIndex + 1;
- const next = SHREK_LEVELS[level];
  const currentThreshold = LEVEL_XP[currentIndex];
  const nextThreshold = LEVEL_XP[level];
- const percent = next ? (xp - currentThreshold) * 100 / (nextThreshold - currentThreshold) : 100;
+ const percent = nextThreshold !== undefined ? (xp - currentThreshold) * 100 / (nextThreshold - currentThreshold) : 100;
  const number = value => value.toLocaleString('es-AR');
- $("gameLevel").textContent = 'LVL ' + String(level).padStart(2, '0');
- $("gameCurrentCharacter").textContent = SHREK_LEVELS[currentIndex].name;
- const levelMessage = next ? 'Te faltan ' + number(Math.round((nextThreshold - xp) * 100) / 100) + ' XP para desbloquear a ' + escapeText(next.name) + '.' : 'Nivel máximo alcanzado.';
- const badges=[{on:records.length>0,emoji:'🥇',name:'Primera sesión'},{on:records.length>=5,emoji:'🔥',name:'5 entrenamientos'},{on:Object.keys(best).length>=3,emoji:'🏆',name:'3 ejercicios'},{on:records.length>=10,emoji:'⚡',name:'10 entrenamientos'}];
- $("progressMetrics").innerHTML='<div class="game-panel game-xp"><div class="game-row"><strong>⭐ EXPERIENCIA TOTAL</strong><span>'+number(xp)+' XP</span></div><div class="game-track" role="progressbar" aria-label="Progreso hacia el próximo nivel" aria-valuenow="'+Math.round(percent)+'"><div style="width:'+percent+'%"></div></div><p>'+levelMessage+'</p><p class="game-muted">Bono semanal: '+number(weeklyXp)+' XP · Kilómetros de Running: '+number(runningXp)+' XP</p><details><summary>Cómo sumar XP</summary><small>+100 por visita (entrenamiento guardado) · +10 por serie completada · +10 por récord de peso por ejercicio · +10 por carrera con récord de distancia o ritmo · +100 una vez por semana al guardar 3 entrenamientos (lunes a domingo, hora de Brisbane) · Running: +20 XP/km por debajo de 7:00 min/km y +15 XP/km desde 7:00 min/km. El primer registro de cada ejercicio o de running establece tu marca inicial.</small></details></div>'+
+ $("gameLevel").textContent = 'Nivel ' + level;
+ const character = SHREK_LEVELS[currentIndex];
+ $("gameCurrentCharacter").textContent = character.name;
+ const portrait = $("gameCurrentPortrait");
+ portrait.hidden = false;
+ portrait.onerror = () => { portrait.hidden = true; };
+ portrait.src = character.image;
+ const levelMessage = nextThreshold !== undefined ? 'Te faltan ' +
+  number(Math.round((nextThreshold - xp) * 100) / 100) + ' XP para llegar al nivel ' + (level + 1) + '.' :
+  'Nivel máximo alcanzado.';
+
+ $("progressMetrics").innerHTML='<div class="game-panel game-xp"><div class="game-row"><strong>⭐ EXPERIENCIA TOTAL</strong><span>'+number(xp)+' XP</span></div><div class="game-track" role="progressbar" aria-label="Progreso hacia el próximo nivel" aria-valuenow="'+Math.round(percent)+'"><div style="width:'+percent+'%"></div></div><p>'+levelMessage+'</p><p class="game-muted">Bono semanal: '+number(weeklyXp)+' XP · Kilómetros de Running: '+number(runningXp)+' XP · Peso corporal: '+number(weighInXp)+' XP</p>'+xpGuide+'</div>'+
+ levelComparison(xp, level, number)+
+ renderSwampAchievements(records, extra.runs || [], experience, totalVolume)+
  '<section class="game-panel"><h3>Personajes de Shrek</h3><ol class="shrek-levels">'+SHREK_LEVELS.map((character, index)=>shrekLevelCard(character,index,currentIndex)).join('')+'</ol></section>'+
- '<div class="game-stats"><div class="game-stat"><span>🏋️</span><strong>'+records.length+'</strong><small>WORKOUTS</small></div><div class="game-stat"><span>💪</span><strong>'+sets+'</strong><small>SERIES</small></div><div class="game-stat"><span>⚡</span><strong>'+totalVolume.toLocaleString('es-AR')+'</strong><small>KG TOTALES</small></div></div>'+
- '<div class="game-panel"><div class="game-row"><h3>🏅 Logros desbloqueados</h3><small>'+badges.filter(b=>b.on).length+' / '+badges.length+'</small></div><div class="game-badges">'+badges.map(b=>'<div class="game-achievement '+(b.on?'unlocked':'locked')+'"><div>'+b.emoji+'</div><small>'+b.name+'</small></div>').join('')+'</div></div>';
+ '<div class="game-stats"><div class="game-stat"><span>🏋️</span><strong>'+records.length+'</strong><small>WORKOUTS</small></div><div class="game-stat"><span>💪</span><strong>'+sets+'</strong><small>SERIES</small></div><div class="game-stat"><span>⚡</span><strong>'+totalVolume.toLocaleString('es-AR')+'</strong><small>KG TOTALES</small></div></div>';
  for (const img of $("progressMetrics").querySelectorAll(".shrek-portrait img")) {
   const showFallback = () => { img.hidden = true; };
   img.addEventListener("error", showFallback, {once: true});
@@ -408,8 +612,25 @@ function renderRunning(){
 function escapeText(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
 $("weightDate").value=new Date().toISOString().slice(0,10);$("runDate").value=new Date().toISOString().slice(0,10);
-$("weightForm").addEventListener("submit",e=>{e.preventDefault();const value=Number($("bodyWeight").value);if(value<=0)return;const x=profileExtras();x.weights.push({date:$("weightDate").value,value});x.weights.sort((a,b)=>a.date.localeCompare(b.date));if(saveExtras(x)){renderProgress();notify("⚖️ Peso registrado. ¡Seguí así!");$("bodyWeight").value=""}});
-$("runningForm").addEventListener("submit",e=>{e.preventDefault();const km=Number($("runKm").value),minutes=Number($("runMinutes").value);if(km<=0||minutes<=0)return;const x=profileExtras();x.runs.push({date:$("runDate").value,km,minutes,notes:$("runNotes").value});if(saveExtras(x)){renderRunning();notify("🏃 ¡Salida registrada!");$("runKm").value="";$("runMinutes").value="";$("runNotes").value=""}});
+$("weightForm").addEventListener("submit",e=>{e.preventDefault();const value=Number($("bodyWeight").value);if(!Number.isFinite(value)||value<=0)return;const x=profileExtras();x.weights??=[];x.weights.push({date:$("weightDate").value,value});x.weights.sort((a,b)=>a.date.localeCompare(b.date));if(saveExtras(x)){renderProgress();showXpGain(XP_PER_WEIGH_IN,"Peso corporal registrado");$("bodyWeight").value=""}});
+$("runningForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const km=Number($("runKm").value),minutes=Number($("runMinutes").value);
+ if(!Number.isFinite(km)||!Number.isFinite(minutes)||km<=0||minutes<=0)return;
+ const x=profileExtras();
+ x.runs??=[];
+ const before=progressExperience([],x.runs);
+ x.runs.push({date:$("runDate").value,km,minutes,notes:$("runNotes").value});
+ if(saveExtras(x)){
+  const after=progressExperience([],x.runs);
+  const totalXp=Math.round((after.xp-before.xp)*100)/100;
+  const reason=after.runningRecords>before.runningRecords?"Running · distancia y récord":"Running · salida registrada";
+  if(totalXp>0)showXpGain(totalXp,reason);
+  else notify("🏃 ¡Salida registrada!");
+  renderRunning();
+  $("runKm").value="";$("runMinutes").value="";$("runNotes").value="";
+ }
+});
 $("chooseTincho").addEventListener("click",()=>selectProfile("tincho"));
 $("chooseEve").addEventListener("click",()=>selectProfile("eve"));
 $("changeProfile").addEventListener("click",home);
@@ -439,7 +660,7 @@ const EVE_DEFAULT_PLANS={
 ["Leg Press",3,"10–12"],["Smith Machine Squat",2,"10"],["Seated Leg Curl",2,"12"],["Seated Row",3,"10–12"],["Chest Press Machine",3,"10–12"],["Hip Abductor",2,"15"],["Plank",2,"20–30 seg"]]
 };
 function allDayPlans(){return profile==="eve"?{...EVE_DEFAULT_PLANS,...getCustomPlans()}:{...DATA.routines,...getCustomPlans()}}
-function showEmptyPlans(){session=null;$("exerciseList").innerHTML='<div class="empty"><h3>🌸 Tu primera rutina</h3><p>Elegí un nombre y agregá los ejercicios uno por uno, separados por grupo muscular. Podés crear todos los planes que quieras.</p><button class="btn primary" id="eveCreatePlan">＋ Crear mi plan</button></div>';$("warmupPanel").classList.add("hidden");$("save").classList.add("hidden");$("editPlan").classList.add("hidden");$("deletePlan").classList.add("hidden");$("eveCreatePlan").addEventListener("click",()=>{$("newPlanPanel").classList.remove("hidden");$("newPlanPanel").scrollIntoView({behavior:"smooth"})})}
+function showEmptyPlans(){session=null;updateRoutineXp();$("exerciseList").innerHTML='<div class="empty"><h3>🌸 Tu primera rutina</h3><p>Elegí un nombre y agregá los ejercicios uno por uno, separados por grupo muscular. Podés crear todos los planes que quieras.</p><button class="btn primary" id="eveCreatePlan">＋ Crear mi plan</button></div>';$("warmupPanel").classList.add("hidden");$("save").classList.add("hidden");$("editPlan").classList.add("hidden");$("deletePlan").classList.add("hidden");$("eveCreatePlan").addEventListener("click",()=>{$("newPlanPanel").classList.remove("hidden");$("newPlanPanel").scrollIntoView({behavior:"smooth"})})}
 function renderDayButtons(){const holder=$("days");holder.replaceChildren();Object.keys(allDayPlans()).forEach(k=>{const wrapper=document.createElement("span");wrapper.style.display="inline-flex";wrapper.style.alignItems="center";wrapper.style.gap="3px";const b=document.createElement("button");b.className="btn"+(k===day?" active":"");b.dataset.day=k;b.textContent=k.length===1?"Día "+k:k;b.addEventListener("click",()=>selectDay(k));wrapper.append(b);if(!["A","B","C"].includes(k)&&!(profile==="eve"&&EVE_DEFAULT_PLANS[k]&&!getCustomPlans()[k])){const del=document.createElement("button");del.type="button";del.className="btn softbtn danger";del.textContent="🗑️";del.title="Eliminar plan "+k;del.setAttribute("aria-label","Eliminar plan "+k);del.addEventListener("click",()=>{if(!confirm("¿Estás seguro de que querés borrar el plan «"+k+"»? Esta acción no se puede deshacer."))return;const plans=getCustomPlans();delete plans[k];if(!saveCustomPlans(plans))return;try{sessionStorage.removeItem(KEY+"_draft_"+profile+"_"+k)}catch(e){}if(day===k){day=Object.keys(allDayPlans())[0]||"";session=day?getSession():null}renderDayButtons();render();updateDeleteButton();notify("Plan eliminado: "+k)});wrapper.append(del)}holder.append(wrapper)})}
 function setupPlanBuilder(){const group=$("newPlanGroup");group.replaceChildren();Object.keys(EXERCISE_GROUPS).forEach(k=>group.add(new Option(k,k)));group.addEventListener("change",updateExerciseOptions);updateExerciseOptions();$("addPlanToggle").addEventListener("click",()=>{$("newPlanPanel").classList.toggle("hidden")});$("cancelNewPlan").addEventListener("click",()=>{$("newPlanPanel").classList.add("hidden");editingPlan=null;$("newPlanName").disabled=false;planBuilding=[];renderPlanSelections()});
 $("addPlanExercise").addEventListener("click",()=>{planBuilding.push($("newPlanExercise").value);renderPlanSelections()});
@@ -448,7 +669,7 @@ function updateExerciseOptions(){const sel=$("newPlanExercise");sel.replaceChild
 function renderPlanSelections(){const div=$("planSelections");div.replaceChildren();planBuilding.forEach((n,i)=>{const row=document.createElement("div");row.className="weightentry";const label=document.createElement("span");label.textContent=(i+1)+". "+n;const remove=document.createElement("button");remove.className="btn softbtn";remove.textContent="✕";remove.addEventListener("click",()=>{planBuilding.splice(i,1);renderPlanSelections()});row.append(label,remove);div.append(row)})}
 function profilePrefs(){try{return JSON.parse(localStorage.getItem(KEY+"_prefs_"+profile))||{}}catch{return {}}}
 function savePrefs(x){try{localStorage.setItem(KEY+"_prefs_"+profile,JSON.stringify(x));window.cloudSchedule?.();}catch{notify("No se pudieron guardar las preferencias")}}
-const UI_LABELS={es:{routine:"🏋️ Rutina",progress:"📈 Progreso",running:"🏃 Running",settings:"⚙️ Configuración",add:"＋ Agregar plan",change:"Cambiar usuario",save:"✓ Guardar entrenamiento"},en:{routine:"🏋️ Workout",progress:"📈 Progress",running:"🏃 Running",settings:"⚙️ Settings",add:"＋ Add plan",change:"Switch user",save:"✓ Save workout"}};
+const UI_LABELS={es:{routine:"Rutina",progress:"Progreso",running:"Running",settings:"Configuración",add:"＋ Agregar plan",change:"Cambiar usuario",save:"✓ Guardar entrenamiento"},en:{routine:"Workout",progress:"Progress",running:"Running",settings:"Settings",add:"＋ Add plan",change:"Switch user",save:"✓ Save workout"}};
 const PALETTES=[
 {id:"lima",name:"Lima nocturna",primary:"#D1F67D",secondary:"#A77BF5",bg:"#111019",surface:"#211E2B",panel:"#292536",border:"#51485E"},
 {id:"violeta",name:"Violeta eléctrico",primary:"#C89BFF",secondary:"#65DCE8",bg:"#120F20",surface:"#241D38",panel:"#302644",border:"#605078"},
@@ -463,7 +684,7 @@ const root=document.documentElement.style;
 for(const [k,v] of [["--accent",color],["--accent-text",contrastOn(color)],["--secondary",secondary],["--app-bg",pal.bg],["--app-surface",pal.surface],["--app-panel",pal.panel],["--app-border",pal.border],["--app-input",pal.bg]])root.setProperty(k,v);
 document.body.dataset.theme=p.theme||"dark";$("accentColor").value=color;$("secondaryColor").value=secondary;$("themeMode").value=p.theme||"dark";$("appLanguage").value=p.language||"es";document.documentElement.lang=p.language||"es";
 renderPalettes(p);
-const l=UI_LABELS[p.language||"es"];document.querySelectorAll("[data-tab]").forEach(b=>b.textContent=l[b.dataset.tab]);$("addPlanToggle").textContent=l.add;$("changeProfile").textContent=l.change;$("save").textContent=l.save;
+const l=UI_LABELS[p.language||"es"];document.querySelectorAll("#navtabs [data-tab]").forEach(b=>b.querySelector(".tab-label").textContent=l[b.dataset.tab]);$("addPlanToggle").textContent=l.add;$("changeProfile").textContent=l.change;$("save").textContent=l.save;
 const photo=$("currentAvatar");photo.classList.toggle("hidden",!p.avatar);if(p.avatar)photo.src=p.avatar;
 const welcomeBtn=$(profile==="tincho"?"chooseTincho":"chooseEve");const av=welcomeBtn.querySelector(".avatar");if(p.avatar){av.style.backgroundImage=`url("${p.avatar}")`;av.style.backgroundSize="cover";av.style.backgroundPosition="center";av.textContent=""}}
 
@@ -576,7 +797,7 @@ ${shape("quads","92,181 114,182 114,205 94,204")}
 ${shape("quads","122,181 147,181 144,205 123,205")}
 </svg><p class="muted" style="font-size:12px">Mapa orientativo de músculos entrenados</p></div>`;
 }
-function showSummary(record){
+function showSummary(record,totalXp,rewards){
 const scores=muscleMap(record),max=Math.max(1,...Object.values(scores));
 const totalSets=record.exercises.reduce((n,e)=>n+e.sets.length,0);
 const totalVolume=record.exercises.reduce((n,e)=>n+e.sets.reduce((a,x)=>a+x.kg*x.reps,0),0);
@@ -587,6 +808,8 @@ const pace=warm.km&&warm.minutes?warm.minutes/warm.km:0;
 const paceStr=pace?`${Math.floor(pace)}:${String(Math.round((pace%1)*60)).padStart(2,"0")} min/km`:"Sin distancia registrada";
 $("summaryDetails").innerHTML=`<p>🎉 ¡Felicitaciones! Completaste ${record.day}. Seguí así, cada sesión suma.</p>
 <div class="summary-grid"><div class="summary-stat"><b>${time}</b>Duración total</div><div class="summary-stat"><b>${totalSets}</b>Series completadas</div><div class="summary-stat"><b>${Math.round(totalVolume)} kg</b>Volumen total levantado</div><div class="summary-stat"><b>${record.exercises.length}</b>Ejercicios</div></div>
+<div class="summary-xp"><strong>✦ +${totalXp.toLocaleString('es-AR')} XP</strong>
+<p>${rewards.filter(([,xp])=>xp>0).map(([reason,xp])=>reason+' +'+xp+' XP').join(' · ')}</p></div>
 <h3>🔥 Warm-up</h3><p>${warm.type} · ${warm.minutes} min · ${warm.km} km · Ritmo: ${paceStr}</p>
 <h3>💪 Músculos trabajados</h3><p class="muted">Colores orientativos basados en series y participación muscular estimada; no miden esfuerzo fisiológico ni intensidad real.</p>
 ${profile==="eve"?fionaBodyFigure(scores):tinchoBodyFigure(scores)}
