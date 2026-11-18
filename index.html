@@ -202,7 +202,7 @@ body[data-theme="light"] .tab-content{
 @media(prefers-reduced-motion:reduce){#achievementFireworks{display:none}}
 @media(max-width:600px){#gamingArea .shrek-levels>li{flex-basis:68%}}
 #activityCalendar .activity-marked{background-color:color-mix(in srgb,var(--accent) 25%,var(--app-panel))}
-.session-actions,.period-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.period-nav{justify-content:space-between}.session-exercise{position:relative}.session-trash{position:absolute;right:7px;top:7px;width:38px;height:38px;border:0;background:transparent;color:var(--app-muted);cursor:pointer;font-size:18px}.session-exercise .head,.session-exercise .exercise-compact{padding-right:38px}.session-actions button{flex:1}.session-actions+#sessionChoice[hidden]{display:none}#activityCalendar{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;margin-top:12px}#activityCalendar span{min-height:39px;border:1px solid var(--app-border);border-radius:5px}#activityCalendar span:empty{border:0}#activityCalendar small{display:block;font-size:12px}#activityCalendar .today{outline:2px solid var(--accent)}#periodCharts section{border-top:1px solid var(--app-border);margin-top:12px}#periodCharts h4{margin:12px 0 2px}#periodCharts svg{display:block;width:100%;max-height:190px}#periodCharts text{font:9px system-ui;fill:var(--app-muted)}
+.session-actions,.period-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.period-nav{justify-content:space-between}.session-exercise{position:relative}.session-trash{position:absolute;right:5px;top:5px;z-index:1;width:44px;height:44px;padding:0;line-height:1;font-size:15px;background:transparent;border-color:transparent;color:var(--app-muted)}.session-trash span{filter:grayscale(1);opacity:.72}.session-trash:is(:hover,:focus-visible) span{opacity:1}.session-exercise .head,.session-exercise .exercise-compact{padding-right:46px}.session-actions{flex-wrap:nowrap}.session-actions button{flex:1;min-width:0;min-height:44px;padding-inline:6px}.session-actions+#sessionChoice[hidden]{display:none}#activityCalendar{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;margin-top:12px}#activityCalendar span{min-height:39px;border:1px solid var(--app-border);border-radius:5px}#activityCalendar span:empty{border:0}#activityCalendar small{display:block;font-size:12px}#activityCalendar .today{outline:2px solid var(--accent)}#periodCharts section{border-top:1px solid var(--app-border);margin-top:12px}#periodCharts h4{margin:12px 0 2px}#periodCharts svg{display:block;width:100%;max-height:190px}#periodCharts text{font:9px system-ui;fill:var(--app-muted)}
 </style></head><body>
 <section id="welcome" class="welcome"><h1>¿Quién va a entrenar?</h1><div class="profiles"><button class="profile" id="chooseTincho"><span class="avatar">🏋️</span>Tincho</button><button class="profile" id="chooseEve"><span class="avatar">💪</span>Eve</button></div><p class="muted">Cada perfil tiene sus propios registros.</p></section>
 <main id="app" class="app hidden"><div class="top"><div><div class="muted">GYM TRACKER</div><h1 id="hello"></h1></div><button class="btn" id="changeProfile">Cambiar usuario</button></div><div class="navtabs" id="navtabs"><button class="btn active" data-tab="routine"><span class="tab-icon" aria-hidden="true">🏋️</span><span class="tab-label">Rutina</span></button><button class="btn" data-tab="progress"><span class="tab-icon" aria-hidden="true">📈</span><span class="tab-label">Progreso</span></button><button class="btn" data-tab="gaming"><span class="tab-icon" aria-hidden="true">🎮</span><span class="tab-label">Juego</span></button><button class="btn" data-tab="running"><span class="tab-icon" aria-hidden="true">🏃</span><span class="tab-label">Running</span></button><button class="btn" data-tab="settings"><span class="tab-icon" aria-hidden="true">⚙️</span><span class="tab-label">Ajustes</span></button></div><div id="tinchoArea" class="tab-content"><div class="routine-xp"><span>XP de esta rutina <small>(al guardar)</small></span><strong id="routineXp">0 XP</strong></div><h2 id="routineHeading">Elegí tu rutina Full Body</h2><div class="buttons" id="days"><button class="btn" data-day="A">Día A</button><button class="btn" data-day="B">Día B</button><button class="btn" data-day="C">Día C</button></div><button id="addPlanToggle" class="btn softbtn" type="button">＋ Agregar plan</button>
@@ -215,7 +215,7 @@ body[data-theme="light"] .tab-content{
 <div class="configrow"><label>Actividad <select id="warmupType"><option value="Cinta">🏃 Cinta</option><option value="Bici">🚴 Bici</option></select></label>
 <label>Minutos <input id="warmupMinutes" type="number" min="0" max="180" step="0.1" value="10"></label>
 <label>Kilómetros <input id="warmupKm" type="number" min="0" step="0.01" placeholder="0.00"></label></div><div id="warmupPace" class="stats">Ingresá la distancia para calcular el ritmo.</div></section>
-<div id="exerciseList"></div><label>Esfuerzo (1–10) <select id="sessionEffort"><option value="">Opcional</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label><div class="session-actions"><button class="btn primary" id="save">✓ Guardar entrenamiento</button><button class="btn" id="addForSession">＋ Agregar ejercicio</button></div><select id="sessionChoice" class="change" aria-label="Agregar ejercicio" hidden></select></div><section id="gamingArea" class="tab-content hidden"><div class="game-hero"><div><div class="game-kicker">Nivel actual</div><h2 id="gameLevel"></h2><p id="gameCurrentCharacter"></p></div><div class="shrek-portrait"><span aria-hidden="true">★</span><img id="gameCurrentPortrait" alt=""></div></div><div id="gameMetrics"></div><div id="stepsChallenge"></div></section>
+<div id="exerciseList"></div><label>Esfuerzo (1–10) <select id="sessionEffort"><option value="">Opcional</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label><div id="sessionActions" class="session-actions"><button type="button" class="btn primary" id="save">✓ Guardar entrenamiento</button><button type="button" class="btn" id="addForSession" aria-controls="sessionChoice">＋ Agregar ejercicio</button></div><select id="sessionChoice" class="change" aria-label="Agregar ejercicio" hidden></select></div><section id="gamingArea" class="tab-content hidden"><div class="game-hero"><div><div class="game-kicker">Nivel actual</div><h2 id="gameLevel"></h2><p id="gameCurrentCharacter"></p></div><div class="shrek-portrait"><span aria-hidden="true">★</span><img id="gameCurrentPortrait" alt=""></div></div><div id="gameMetrics"></div><div id="stepsChallenge"></div></section>
 <section id="progressArea" class="tab-content hidden"><h2>Progreso</h2><div class="exercise"><h3 id="activityHeading">Calendario de actividad</h3><div class="period-nav"><button class="btn" id="calendarPrev" aria-label="Mes anterior">‹</button><strong id="calendarMonth"></strong><button class="btn" id="calendarNext" aria-label="Mes siguiente">›</button></div><div id="activityCalendar"></div><p id="activityLegend" class="muted"></p><p id="streak" role="status"></p><progress id="weeklyGoal" max="3" value="0" style="width:100%;accent-color:var(--accent)"></progress></div>
 <div class="exercise"><label>Período <select id="periodSelect"><option value="week">Semanal</option><option value="month">Mensual</option><option value="quarter">Trimestral</option><option value="half">Semestral</option><option value="year">Anual</option></select></label><div class="period-nav"><button class="btn" id="periodPrev" aria-label="Período anterior">‹</button><strong id="chartRange"></strong><button class="btn" id="periodNext" aria-label="Período siguiente">›</button></div><div id="periodCharts"></div></div><div class="exercise"><h3>Registrar peso</h3><form id="weightForm"><label>Fecha <input id="weightDate" type="date" required></label><label>Peso (kg) <input id="bodyWeight" type="number" min="20" max="400" step="0.1" required placeholder="76.5"></label><button class="btn primary" type="submit">Guardar peso</button></form></div><div id="trainingMetrics" class="analytics-metrics statgrid"></div>
 <div class="exercise analytics-panel"><h3>Carga por ejercicio</h3>
@@ -468,6 +468,8 @@ const english=new Map([
  ["⭐ EXPERIENCIA TOTAL", "⭐ TOTAL EXPERIENCE"],
  ["Progreso hacia el próximo nivel", "Progress to the next level"],
  ["Nivel máximo alcanzado.", "Maximum level reached."],
+ ["Nivel anterior", "Previous level"],
+ ["Nivel siguiente", "Next level"],
  ["Niveles desbloqueados", "Unlocked levels"],
  ["Personaje secreto", "Secret character"],
  ["Personaje anterior", "Previous character"],
@@ -951,7 +953,7 @@ function showXpGain(amount, reason) {
  setTimeout(() => pop.remove(), 2000);
 }
 
-function render(){updateRoutineXp();const container=$("exerciseList");container.replaceChildren();if(!session){showEmptyPlans();return}$("warmupPanel").classList.remove("hidden");$("save").classList.remove("hidden");$("editPlan").classList.remove("hidden");$("deletePlan").classList.remove("hidden");session.forEach((ex,i)=>{const prev=priorFor(ex.name);const card=document.createElement("article");card.className="exercise";
+function render(){updateRoutineXp();const container=$("exerciseList");container.replaceChildren();if(!session){showEmptyPlans();return}$("warmupPanel").classList.remove("hidden");$("sessionActions").classList.remove("hidden");$("editPlan").classList.remove("hidden");$("deletePlan").classList.remove("hidden");session.forEach((ex,i)=>{const prev=priorFor(ex.name);const card=document.createElement("article");card.className="exercise";
 const compact=document.createElement("button");
 compact.type="button";
 compact.className="exercise-compact";
@@ -966,9 +968,16 @@ body.id="exercise-details-"+i;
 card.append(compact,body);
 card.classList.add("session-exercise");
 const trash=document.createElement("button");
-trash.type="button";trash.className="session-trash";trash.textContent="🗑";
-trash.setAttribute("aria-label",ui("Quitar ejercicio de la sesión","Remove exercise from session")+": "+ex.name);
-trash.onclick=()=>{session.splice(i,1);storeDraft();render()};
+trash.type="button";trash.className="btn session-trash";trash.innerHTML='<span aria-hidden="true">🗑</span>';
+trash.title=ui("Quitar ejercicio de la sesión","Remove exercise from session");
+trash.setAttribute("aria-label",trash.title+": "+ex.name);
+trash.onclick=()=>{
+ session.splice(i,1);
+ storeDraft();
+ render();
+ (container.children[Math.min(i,session.length-1)]?.querySelector(".session-trash")||$("addForSession")).focus();
+ notify(ui("Ejercicio quitado de esta sesión","Exercise removed from this session"));
+};
 card.append(trash);
 const head=document.createElement("div");head.className="head";const photo=document.createElement("img");photo.className="thumb";photo.src=exercisePhoto(ex.name)||MACHINE_PHOTOS[PHOTO_MAP_2[DATA.catalog[ex.name]??0]];photo.alt="Foto de referencia: "+ex.name;const title=document.createElement("div");title.innerHTML=`<div class="exname"></div><div class="muted"></div>`;title.children[0].textContent=(i+2)+". "+ex.name;title.children[1].textContent=ex.sets.length+" series · "+ex.range+" reps";head.append(photo,title);photo.style.cursor="zoom-in";photo.setAttribute("role","button");photo.tabIndex=0;photo.title="Ampliar fotos";photo.addEventListener("click",()=>openGallery(ex.name));photo.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openGallery(ex.name)}});body.append(head);
 const control=document.createElement("div");control.className="controls";
@@ -1055,6 +1064,7 @@ const done=document.createElement("button");done.className="check"+(set.done?" c
 const remove=document.createElement("button");remove.className="remove";remove.textContent="×";remove.title="Quitar esta serie";remove.setAttribute("aria-label","Eliminar serie "+(j+1));remove.addEventListener("click",()=>{if(ex.sets.length<=1){notify("Dejá al menos una serie");return}ex.sets.splice(j,1);storeDraft();render()});row.append(remove);body.append(row)});
 const add=document.createElement("button");add.className="btn primary";add.textContent="＋ Agregar serie";add.style.marginTop="9px";add.addEventListener("click",()=>{ex.sets.push({kg:"",reps:"",done:false});storeDraft();render()});body.append(add);updateExerciseCard();container.append(card)});updateActive()}
 $("addForSession").onclick=()=>{
+ if(!session)return;
  const sel=$("sessionChoice");sel.replaceChildren(new Option(ui("Elegí un ejercicio","Choose an exercise"),""));
  for(const name of new Set([...Object.keys(DATA.catalog),...Object.values(EXERCISE_GROUPS).flat()]))sel.add(new Option(name,name));
  sel.hidden=!sel.hidden;if(!sel.hidden)sel.focus();
@@ -1065,7 +1075,10 @@ $("sessionChoice").onchange=()=>{
  const preset=Object.values(allDayPlans()).flat().find(p=>p[0]===choice.value);
  const [,plannedSets,range]=preset||[choice.value,3,"8–12"];
  session.push({name:choice.value,plannedSets,range,sets:Array.from({length:plannedSets},()=>({kg:"",reps:"",done:false}))});
- choice.hidden=true;storeDraft();render();
+ choice.hidden=true;
+ storeDraft();
+ render();
+ $("exerciseList").lastElementChild.querySelector(".set input").focus();
 };
 $("sessionEffort").onchange=()=>sessionStorage.setItem(draftKey()+"_effort",$("sessionEffort").value);
 function saveWorkout(){
@@ -1807,9 +1820,9 @@ function renderGaming(){
  levelComparison(xp, level, number)+
  renderSwampAchievements(records, extra.runs || [], experience, totalVolume)+
  '<section class="game-panel"><h3 id="characterHeading">Niveles desbloqueados</h3><div class="character-navigation">'+
- '<button class="btn" type="button" data-character-step="-1" aria-label="Personaje anterior">‹</button>'+
- '<button class="btn" type="button" data-character-step="1" aria-label="Siguiente personaje">›</button></div>'+
- '<ol class="shrek-levels" tabindex="0" aria-labelledby="characterHeading">'+SHREK_LEVELS.slice(0,currentIndex+2).map((character,index)=>shrekLevelCard(character,index,currentIndex,xp)).join('')+'</ol></section>';
+ '<button class="btn" type="button" data-character-step="-1" aria-label="Nivel anterior">‹</button>'+
+ '<button class="btn" type="button" data-character-step="1" aria-label="Nivel siguiente">›</button></div>'+
+ '<ol class="shrek-levels" tabindex="0" aria-labelledby="characterHeading">'+SHREK_LEVELS.map((character,index)=>shrekLevelCard(character,index,currentIndex,xp)).join('')+'</ol></section>';
  const carousel=$("gameMetrics").querySelector(".shrek-levels");
  const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
  for(const button of $("gameMetrics").querySelectorAll("[data-character-step]")){
@@ -1969,7 +1982,7 @@ const EVE_DEFAULT_PLANS={
 ["Leg Press",3,"10–12"],["Smith Machine Squat",2,"10"],["Seated Leg Curl",2,"12"],["Seated Row",3,"10–12"],["Chest Press Machine",3,"10–12"],["Hip Abductor",2,"15"],["Plank",2,"20–30 seg"]]
 };
 function allDayPlans(){return profile==="eve"?{...EVE_DEFAULT_PLANS,...getCustomPlans()}:{...DATA.routines,...getCustomPlans()}}
-function showEmptyPlans(){session=null;updateRoutineXp();$("exerciseList").innerHTML='<div class="empty"><h3>🌸 Tu primera rutina</h3><p>Elegí un nombre y agregá los ejercicios uno por uno, separados por grupo muscular. Podés crear todos los planes que quieras.</p><button class="btn primary" id="eveCreatePlan">＋ Crear mi plan</button></div>';$("warmupPanel").classList.add("hidden");$("save").classList.add("hidden");$("editPlan").classList.add("hidden");$("deletePlan").classList.add("hidden");$("eveCreatePlan").addEventListener("click",()=>{$("newPlanPanel").classList.remove("hidden");$("newPlanPanel").scrollIntoView({behavior:"smooth"})})}
+function showEmptyPlans(){session=null;updateRoutineXp();$("exerciseList").innerHTML='<div class="empty"><h3>🌸 Tu primera rutina</h3><p>Elegí un nombre y agregá los ejercicios uno por uno, separados por grupo muscular. Podés crear todos los planes que quieras.</p><button class="btn primary" id="eveCreatePlan">＋ Crear mi plan</button></div>';$("warmupPanel").classList.add("hidden");$("sessionActions").classList.add("hidden");$("sessionChoice").hidden=true;$("editPlan").classList.add("hidden");$("deletePlan").classList.add("hidden");$("eveCreatePlan").addEventListener("click",()=>{$("newPlanPanel").classList.remove("hidden");$("newPlanPanel").scrollIntoView({behavior:"smooth"})})}
 function renderDayButtons(){const holder=$("days");holder.replaceChildren();Object.keys(allDayPlans()).forEach(k=>{const wrapper=document.createElement("span");wrapper.style.display="inline-flex";wrapper.style.alignItems="center";wrapper.style.gap="3px";const b=document.createElement("button");b.className="btn"+(k===day?" active":"");b.dataset.day=k;b.textContent=["A","B","C"].includes(k)?"Día "+k:k;if(!["A","B","C"].includes(k)&&!Object.hasOwn(EVE_DEFAULT_PLANS,k))b.translate=false;b.addEventListener("click",()=>selectDay(k));wrapper.append(b);if(!["A","B","C"].includes(k)&&!(profile==="eve"&&EVE_DEFAULT_PLANS[k]&&!getCustomPlans()[k])){const del=document.createElement("button");del.type="button";del.className="btn softbtn danger";del.textContent="🗑️";del.title="Eliminar plan "+k;del.setAttribute("aria-label","Eliminar plan "+k);del.addEventListener("click",()=>{if(!confirmInLanguage("¿Estás seguro de que querés borrar el plan «"+k+"»? Esta acción no se puede deshacer."))return;const plans=getCustomPlans();delete plans[k];if(!saveCustomPlans(plans))return;try{sessionStorage.removeItem(KEY+"_draft_"+profile+"_"+k)}catch(e){}if(day===k){day=Object.keys(allDayPlans())[0]||"";session=day?getSession():null}renderDayButtons();render();updateDeleteButton();notify("Plan eliminado: "+k)});wrapper.append(del)}holder.append(wrapper)})}
 function setupPlanBuilder(){const group=$("newPlanGroup");group.replaceChildren();Object.keys(EXERCISE_GROUPS).forEach(k=>group.add(new Option(k,k)));group.addEventListener("change",updateExerciseOptions);updateExerciseOptions();$("addPlanToggle").addEventListener("click",()=>{$("newPlanPanel").classList.toggle("hidden")});$("cancelNewPlan").addEventListener("click",()=>{$("newPlanPanel").classList.add("hidden");editingPlan=null;$("newPlanName").disabled=false;planBuilding=[];renderPlanSelections()});
 $("addPlanExercise").addEventListener("click",()=>{planBuilding.push($("newPlanExercise").value);renderPlanSelections()});
